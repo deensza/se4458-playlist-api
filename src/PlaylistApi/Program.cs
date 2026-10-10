@@ -31,7 +31,8 @@ builder.Services.AddSwaggerGen(options =>
     {
         Title = "Playlist API",
         Version = "v1",
-        Description = "SE4458 Assignment 2 – Group 2 (Playlist). Simple REST API with an in-memory data store.",
+        Description = "SE4458 Assignment 2 – Group 2 (Playlist). Simple REST API with an in-memory data store. " +
+                      "A small demo UI that uses this API is available at [/app/](/app/).",
         Contact = new OpenApiContact { Name = "Bermal Deniz Akkaya" }
     });
 
@@ -56,6 +57,11 @@ app.UseSwaggerUI(options =>
     options.SwaggerEndpoint("/swagger/v1/swagger.json", "Playlist API v1");
     options.DocumentTitle = "Playlist API – Swagger";
 });
+
+// Optional demo UI (not required by the assignment): wwwroot/app/index.html is served at /app/.
+// It only calls the public API endpoints above; the API itself does not depend on it.
+app.UseDefaultFiles();
+app.UseStaticFiles();
 
 // Opening the root URL takes the visitor straight to the swagger page.
 app.MapGet("/", () => Results.Redirect("/swagger")).ExcludeFromDescription();
